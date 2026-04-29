@@ -28,13 +28,13 @@ import androidx.navigation.NavController
 
 // Tela 1: coleta os dados da partida e navega para o Resumo
 @Composable
-fun ConfiguracaoScreen(navController: NavController) {
+fun MatchSetupScreen(navController: NavController) {
     // rememberSaveable preserva os campos na rotação de tela
-    var timeA by rememberSaveable { mutableStateOf("") }
-    var timeB by rememberSaveable { mutableStateOf("") }
-    var golsA by rememberSaveable { mutableStateOf("") }
-    var golsB by rememberSaveable { mutableStateOf("") }
-    var erroMensagem by rememberSaveable { mutableStateOf("") }
+    var teamA by rememberSaveable { mutableStateOf("") }
+    var teamB by rememberSaveable { mutableStateOf("") }
+    var goalsA by rememberSaveable { mutableStateOf("") }
+    var goalsB by rememberSaveable { mutableStateOf("") }
+    var errorMessage by rememberSaveable { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -60,8 +60,8 @@ fun ConfiguracaoScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(32.dp))
 
         OutlinedTextField(
-            value = timeA,
-            onValueChange = { timeA = it },
+            value = teamA,
+            onValueChange = { teamA = it },
             label = { Text("Nome do Time A") },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true
@@ -70,8 +70,8 @@ fun ConfiguracaoScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(12.dp))
 
         OutlinedTextField(
-            value = golsA,
-            onValueChange = { golsA = it },
+            value = goalsA,
+            onValueChange = { goalsA = it },
             label = { Text("Gols do Time A") },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,
@@ -81,8 +81,8 @@ fun ConfiguracaoScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(12.dp))
 
         OutlinedTextField(
-            value = timeB,
-            onValueChange = { timeB = it },
+            value = teamB,
+            onValueChange = { teamB = it },
             label = { Text("Nome do Time B") },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true
@@ -91,8 +91,8 @@ fun ConfiguracaoScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(12.dp))
 
         OutlinedTextField(
-            value = golsB,
-            onValueChange = { golsB = it },
+            value = goalsB,
+            onValueChange = { goalsB = it },
             label = { Text("Gols do Time B") },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,
@@ -102,9 +102,9 @@ fun ConfiguracaoScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(8.dp))
 
         // Mensagem de erro de validação
-        if (erroMensagem.isNotEmpty()) {
+        if (errorMessage.isNotEmpty()) {
             Text(
-                text = erroMensagem,
+                text = errorMessage,
                 color = MaterialTheme.colorScheme.error,
                 fontSize = 14.sp
             )
@@ -116,22 +116,22 @@ fun ConfiguracaoScreen(navController: NavController) {
             onClick = {
                 // Validação: todos os campos obrigatórios
                 when {
-                    timeA.isBlank() || timeB.isBlank() || golsA.isBlank() || golsB.isBlank() -> {
-                        erroMensagem = "Preencha todos os campos."
+                    teamA.isBlank() || teamB.isBlank() || goalsA.isBlank() || goalsB.isBlank() -> {
+                        errorMessage = "Preencha todos os campos."
                     }
-                    golsA.toIntOrNull() == null || golsA.toInt() < 0 -> {
-                        erroMensagem = "Gols do Time A deve ser um número inteiro >= 0."
+                    goalsA.toIntOrNull() == null || goalsA.toInt() < 0 -> {
+                        errorMessage = "Gols do Time A deve ser um número inteiro >= 0."
                     }
-                    golsB.toIntOrNull() == null || golsB.toInt() < 0 -> {
-                        erroMensagem = "Gols do Time B deve ser um número inteiro >= 0."
+                    goalsB.toIntOrNull() == null || goalsB.toInt() < 0 -> {
+                        errorMessage = "Gols do Time B deve ser um número inteiro >= 0."
                     }
                     else -> {
-                        erroMensagem = ""
-                        val ga = golsA.toInt()
-                        val gb = golsB.toInt()
+                        errorMessage = ""
+                        val ga = goalsA.toInt()
+                        val gb = goalsB.toInt()
                         // Uri.encode garante que nomes com caracteres especiais não quebrem a rota
                         navController.navigate(
-                            "resumo/${Uri.encode(timeA)}/${Uri.encode(timeB)}/$ga/$gb"
+                            "match-summary/${Uri.encode(teamA)}/${Uri.encode(teamB)}/$ga/$gb"
                         )
                     }
                 }

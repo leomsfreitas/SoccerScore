@@ -14,9 +14,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import br.edu.ifsp.scl.sc3045366.soccerscore.screens.ConfiguracaoScreen
-import br.edu.ifsp.scl.sc3045366.soccerscore.screens.ResumoScreen
-import br.edu.ifsp.scl.sc3045366.soccerscore.screens.ResultadoScreen
+import br.edu.ifsp.scl.sc3045366.soccerscore.screens.FinalResultScreen
+import br.edu.ifsp.scl.sc3045366.soccerscore.screens.MatchSetupScreen
+import br.edu.ifsp.scl.sc3045366.soccerscore.screens.MatchSummaryScreen
 import br.edu.ifsp.scl.sc3045366.soccerscore.ui.theme.SoccerScoreTheme
 
 class MainActivity : ComponentActivity() {
@@ -38,58 +38,58 @@ fun SoccerScoreApp() {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = "configuracao",
+            startDestination = "match-setup",
             modifier = Modifier.padding(innerPadding)
         ) {
-            // Tela 1 – Configuração da Partida
-            composable("configuracao") {
-                ConfiguracaoScreen(navController = navController)
+            // Screen 1 - Match Setup
+            composable("match-setup") {
+                MatchSetupScreen(navController = navController)
             }
 
-            // Tela 2 – Resumo da Partida
-            // Parâmetros: nomes dos times (String) e gols (Int) via rota
+            // Screen 2 - Match Summary
+            // Parameters: team names (String) and goals (Int) via route
             composable(
-                route = "resumo/{timeA}/{timeB}/{golsA}/{golsB}",
+                route = "match-summary/{teamA}/{teamB}/{goalsA}/{goalsB}",
                 arguments = listOf(
-                    navArgument("timeA") { type = NavType.StringType },
-                    navArgument("timeB") { type = NavType.StringType },
-                    navArgument("golsA") { type = NavType.IntType },
-                    navArgument("golsB") { type = NavType.IntType }
+                    navArgument("teamA") { type = NavType.StringType },
+                    navArgument("teamB") { type = NavType.StringType },
+                    navArgument("goalsA") { type = NavType.IntType },
+                    navArgument("goalsB") { type = NavType.IntType }
                 )
             ) { backStackEntry ->
-                val timeA = backStackEntry.arguments?.getString("timeA") ?: ""
-                val timeB = backStackEntry.arguments?.getString("timeB") ?: ""
-                val golsA = backStackEntry.arguments?.getInt("golsA") ?: 0
-                val golsB = backStackEntry.arguments?.getInt("golsB") ?: 0
-                ResumoScreen(
+                val teamA = backStackEntry.arguments?.getString("teamA") ?: ""
+                val teamB = backStackEntry.arguments?.getString("teamB") ?: ""
+                val goalsA = backStackEntry.arguments?.getInt("goalsA") ?: 0
+                val goalsB = backStackEntry.arguments?.getInt("goalsB") ?: 0
+                MatchSummaryScreen(
                     navController = navController,
-                    timeA = timeA,
-                    timeB = timeB,
-                    golsA = golsA,
-                    golsB = golsB
+                    teamA = teamA,
+                    teamB = teamB,
+                    goalsA = goalsA,
+                    goalsB = goalsB
                 )
             }
 
-            // Tela 3 – Resultado Final
+            // Screen 3 - Final Result
             composable(
-                route = "resultado/{timeA}/{timeB}/{golsA}/{golsB}",
+                route = "final-result/{teamA}/{teamB}/{goalsA}/{goalsB}",
                 arguments = listOf(
-                    navArgument("timeA") { type = NavType.StringType },
-                    navArgument("timeB") { type = NavType.StringType },
-                    navArgument("golsA") { type = NavType.IntType },
-                    navArgument("golsB") { type = NavType.IntType }
+                    navArgument("teamA") { type = NavType.StringType },
+                    navArgument("teamB") { type = NavType.StringType },
+                    navArgument("goalsA") { type = NavType.IntType },
+                    navArgument("goalsB") { type = NavType.IntType }
                 )
             ) { backStackEntry ->
-                val timeA = backStackEntry.arguments?.getString("timeA") ?: ""
-                val timeB = backStackEntry.arguments?.getString("timeB") ?: ""
-                val golsA = backStackEntry.arguments?.getInt("golsA") ?: 0
-                val golsB = backStackEntry.arguments?.getInt("golsB") ?: 0
-                ResultadoScreen(
+                val teamA = backStackEntry.arguments?.getString("teamA") ?: ""
+                val teamB = backStackEntry.arguments?.getString("teamB") ?: ""
+                val goalsA = backStackEntry.arguments?.getInt("goalsA") ?: 0
+                val goalsB = backStackEntry.arguments?.getInt("goalsB") ?: 0
+                FinalResultScreen(
                     navController = navController,
-                    timeA = timeA,
-                    timeB = timeB,
-                    golsA = golsA,
-                    golsB = golsB
+                    teamA = teamA,
+                    teamB = teamB,
+                    goalsA = goalsA,
+                    goalsB = goalsB
                 )
             }
         }

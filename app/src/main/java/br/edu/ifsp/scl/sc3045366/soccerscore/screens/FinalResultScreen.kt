@@ -21,17 +21,17 @@ import androidx.navigation.NavController
 
 // Tela 3: exibe o resultado final da partida
 @Composable
-fun ResultadoScreen(
+fun FinalResultScreen(
     navController: NavController,
-    timeA: String,
-    timeB: String,
-    golsA: Int,
-    golsB: Int
+    teamA: String,
+    teamB: String,
+    goalsA: Int,
+    goalsB: Int
 ) {
     // Regra de negócio: determina o vencedor ou empate
-    val resultado = when {
-        golsA > golsB -> "$timeA venceu!"
-        golsB > golsA -> "$timeB venceu!"
+    val result = when {
+        goalsA > goalsB -> "$teamA venceu!"
+        goalsB > goalsA -> "$teamB venceu!"
         else -> "Empate emocionante!"
     }
 
@@ -51,7 +51,7 @@ fun ResultadoScreen(
         Spacer(modifier = Modifier.height(40.dp))
 
         Text(
-            text = "$timeA  $golsA x $golsB  $timeB",
+            text = "$teamA  $goalsA x $goalsB  $teamB",
             fontSize = 20.sp,
             textAlign = TextAlign.Center
         )
@@ -59,7 +59,7 @@ fun ResultadoScreen(
         Spacer(modifier = Modifier.height(32.dp))
 
         Text(
-            text = resultado,
+            text = result,
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary,
@@ -71,7 +71,7 @@ fun ResultadoScreen(
         Button(
             onClick = {
                 // Volta para a Tela 1 limpando a pilha de navegação
-                navController.popBackStack("configuracao", inclusive = false)
+                navController.popBackStack("match-setup", inclusive = false)
             },
             modifier = Modifier.fillMaxWidth()
         ) {

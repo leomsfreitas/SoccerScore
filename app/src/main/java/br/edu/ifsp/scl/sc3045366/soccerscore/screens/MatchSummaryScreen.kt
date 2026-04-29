@@ -22,12 +22,12 @@ import androidx.navigation.NavController
 
 // Tela 2: exibe o resumo da partida para confirmação
 @Composable
-fun ResumoScreen(
+fun MatchSummaryScreen(
     navController: NavController,
-    timeA: String,
-    timeB: String,
-    golsA: Int,
-    golsB: Int
+    teamA: String,
+    teamB: String,
+    goalsA: Int,
+    goalsB: Int
 ) {
     Column(
         modifier = Modifier
@@ -45,7 +45,7 @@ fun ResumoScreen(
         Spacer(modifier = Modifier.height(40.dp))
 
         Text(
-            text = timeA,
+            text = teamA,
             fontSize = 22.sp,
             fontWeight = FontWeight.SemiBold
         )
@@ -54,7 +54,7 @@ fun ResumoScreen(
 
         // Placar no formato "2 x 1"
         Text(
-            text = "$golsA  x  $golsB",
+            text = "$goalsA  x  $goalsB",
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold
         )
@@ -62,7 +62,7 @@ fun ResumoScreen(
         Spacer(modifier = Modifier.height(12.dp))
 
         Text(
-            text = timeB,
+            text = teamB,
             fontSize = 22.sp,
             fontWeight = FontWeight.SemiBold
         )
@@ -76,7 +76,7 @@ fun ResumoScreen(
         Button(
             onClick = {
                 navController.navigate(
-                    "resultado/${Uri.encode(timeA)}/${Uri.encode(timeB)}/$golsA/$golsB"
+                    "final-result/${Uri.encode(teamA)}/${Uri.encode(teamB)}/$goalsA/$goalsB"
                 )
             },
             modifier = Modifier.fillMaxWidth()
