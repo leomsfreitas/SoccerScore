@@ -1,34 +1,33 @@
 # SoccerScore
 
-Aplicativo Android de Simulador de Placar de Futebol desenvolvido com Jetpack Compose e Navigation Compose.
+Android Soccer Score Simulator developed with Jetpack Compose and Navigation Compose.
 
-## Funcionalidades
+## Features
 
-- **Tela 1 – Configuração da Partida**: inserção dos nomes dos times e quantidade de gols, com validação de campos.
-- **Tela 2 – Resumo da Partida**: exibe o placar antes da confirmação, com opção de editar ou confirmar.
-- **Tela 3 – Resultado Final**: exibe o vencedor ou empate, com botão para iniciar novo jogo.
+- **Screen 1 – Match Setup**: input fields for team names and goal counts, with field validation.
+- **Screen 2 – Match Summary**: displays the scoreboard before confirmation, with options to edit or confirm.
+- **Screen 3 – Final Result**: shows the winner or a draw, with a button to start a new game.
 
-## Tecnologias
+## Technologies
 
 - Kotlin
 - Jetpack Compose
-- Navigation Compose (passagem de parâmetros via rotas)
-- `rememberSaveable` para preservação de estado na rotação de tela
+- Navigation Compose (parameter passing via routes)
+- `rememberSaveable` for state preservation on screen rotation
 
-## Como executar
+## How to Run
 
-1. Abra o projeto no Android Studio.
-2. Sincronize as dependências Gradle.
-3. Execute em um emulador ou dispositivo físico com Android 8.0+ (API 26).
+1. Open the project in Android Studio.
+2. Sync Gradle dependencies.
+3. Run on an emulator or physical device with Android 8.0+ (API 26).
 
-## Estrutura do projeto
+## Project Structure
 
 ```
 app/src/main/java/.../soccerscore/
-├── MainActivity.kt           # NavHost com as 3 rotas
+├── MainActivity.kt           # NavHost with the 3 routes
 └── screens/
-    ├── ConfiguracaoScreen.kt # Tela 1
-    ├── ResumoScreen.kt       # Tela 2
-    └── ResultadoScreen.kt    # Tela 3
+    ├── ConfiguracaoScreen.kt # Screen 1
+    ├── ResumoScreen.kt       # Screen 2
+    └── ResultadoScreen.kt    # Screen 3
 ```
-
